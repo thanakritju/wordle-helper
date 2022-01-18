@@ -24,26 +24,23 @@ def update_words(words, rule, required_chars, black_list_rules):
 
 def handle_input(user_input, required_chars, black_list_rules):
     rule = ""
-    black_list = ""
     word, result = user_input.split(" ")
 
     for index, char in enumerate(result):
+        black_list = [".",".",".",".","."]
         insert_char = word[index].lower()
         if char == "G":
             rule += insert_char
-            black_list += "."
             if insert_char not in required_chars:
                 required_chars.append(insert_char)
         elif char == "Y":
             rule += "."
-            black_list += "."
             if insert_char not in required_chars:
                 required_chars.append(insert_char)
         else:
             rule += "."
-            black_list += insert_char
-    
-    black_list_rules.append(black_list)
+            black_list[index] = insert_char
+            black_list_rules.append("".join(black_list))
 
     return rule, required_chars, black_list_rules
 
