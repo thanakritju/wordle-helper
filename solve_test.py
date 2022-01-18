@@ -21,9 +21,10 @@ class TestUpdateWords(unittest.TestCase):
         rules = "cok.."
         required_chars = ["c", "o", "k"]
         black_list_chars = ["....r"]
+        wrong_spot_chars = []
         expected = ["coked", "cokey", "cokes", "cokie"]
 
-        result = update_words(words, rules, required_chars, black_list_chars)
+        result = update_words(words, rules, required_chars, wrong_spot_chars, black_list_chars)
 
         self.assertEqual(result, expected)
         
@@ -38,10 +39,11 @@ class TestUpdateWords(unittest.TestCase):
         ]
         rules = "..i.."
         required_chars = ["i"]
+        wrong_spot_chars = []
         black_list_chars = ["g....", ".u...", "...l.", "....d"]
-        expected = ["which", "being", "union"]
+        expected = ["which"]
 
-        result = update_words(words, rules, required_chars, black_list_chars)
+        result = update_words(words, rules, required_chars, wrong_spot_chars, black_list_chars)
 
         self.assertEqual(result, expected)
 
@@ -49,9 +51,9 @@ class TestUpdateWords(unittest.TestCase):
 class TestHandleInput(unittest.TestCase):
     def test_should_handle_input_correctly(self):
         test_cases = [
-            ("FREED BGBBB", (".r...", ["r"], ["f....","..e..", "...e.", "....d"])),
-            ("PORSE GYYBB", ("p....", ["p","o","r"], ["...s.", "....e"])),
-            ("GUILD BBGBB", ("..i..", ["i"], ["g....", ".u...", "...l.", "....d"])),
+            ("FREED BGBBB", (".r...", ["r"], [], ["f....","..e..", "...e.", "....d"])),
+            ("PORSE GYYBB", ("p....", ["p","o","r"], [(1, 'o'), (2, 'r')], ["...s.", "....e"])),
+            ("GUILD BBGBB", ("..i..", ["i"], [], ["g....", ".u...", "...l.", "....d"])),
         ]
 
         for user_input, expected in test_cases:

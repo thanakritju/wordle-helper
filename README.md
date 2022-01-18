@@ -10,32 +10,56 @@ Keep adding your guess to narrow the word list.
 
 Use this program with care, it is not a bug-free software.
 
+answer: POINT
+
 ```
-Your input: PROPS GGGBB
-proal
-proas
-probe
-prodd
-prods
-proem
-proke
-proms
-prone
-prong
-propr
-prose
-prosy
-proso
-pross
-prost
-prote
-proto
-prove
-prowl
-prows
-proxy
-Your input: PROSY GGGBG
-proxy
+Your input: OLIVE YBGBB
+union
+point
+prior
+joint
+going
+moist
+doing
+raion
+coins
+haiti
+cairo
+joins
+amino
+chico
+guido
+quito
+rhino
+agios
+axiom
+anion
+primo
+saito
+moira
+xxiii
+noisy
+brito
+noida
+scion
+chino
+trios
+chios
+taito
+akiko
+spiro
+hoist
+zaidi
+csiro
+Your input: CHINO BBGGY
+point
+joint
+going
+doing
+joins
+amino
+Your input: JOINT BGGGG
+point
 ```
 
 Source of data: https://en.lexipedia.org/
