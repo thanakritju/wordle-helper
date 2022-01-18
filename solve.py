@@ -8,20 +8,12 @@ def load_words():
     return words
 
 
-def update_words(words, rule, required_chars, black_list_rules):
+def update_words(words, rule, required_chars, wrong_spot_chars, black_list_rules):
     updated = []
 
     # Built exception rule
     black_list_rule = [ _.replace('.', '') for _ in black_list_rules]
     black_list_rule = ''.join(black_list_rule)
-
-    # rebuilt required chars position
-    required_chars_pattern = []
-    for required_char in required_chars:
-        match = re.match('([\w])', required_char)
-        matched_pos = match.start()
-        matched_char = match.group(0)
-        required_chars_pattern.append((matched_pos, matched_char))
 
     for word in words:
 
@@ -30,11 +22,11 @@ def update_words(words, rule, required_chars, black_list_rules):
             continue
 
         # Have to contain all required characters
-        elif not [char.lower() in required_chars for char in word].count(True) >= len(required_chars):
+        elif not [char.lower() in required_chars for char in list(set(word))].count(True) >= len(required_chars):
             continue
 
         # Filter out words that still have wrong spot char in the same place
-        elif any([ word[req_pos] == req_char for req_pos, req_char in required_chars_pattern]):
+        elif any([ word[req_pos] == req_char for req_pos, req_char in wrong_spot_chars]):
             continue
 
         # Perfectly matched with the ruled pattern
@@ -46,6 +38,7 @@ def update_words(words, rule, required_chars, black_list_rules):
 
 def handle_input(user_input, required_chars, black_list_rules):
     rule = ""
+    wrong_spot_chars = []
     word, result = user_input.split(" ")
 
     for index, char in enumerate(result):
@@ -57,6 +50,7 @@ def handle_input(user_input, required_chars, black_list_rules):
                 required_chars.append(insert_char)
         elif char == "Y":
             rule += "."
+            wrong_spot_chars.append((index, insert_char))
             if insert_char not in required_chars:
                 required_chars.append(insert_char)
         else:
@@ -64,7 +58,7 @@ def handle_input(user_input, required_chars, black_list_rules):
             black_list[index] = insert_char
             black_list_rules.append("".join(black_list))
 
-    return rule, required_chars, black_list_rules
+    return rule, required_chars, wrong_spot_chars, black_list_rules
 
 
 def print_words(words):
