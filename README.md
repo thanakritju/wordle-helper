@@ -37,3 +37,5 @@ proxy
 Your input: PROSY GGGBG
 proxy
 ```
+
+Source of data: https://en.lexipedia.org/
